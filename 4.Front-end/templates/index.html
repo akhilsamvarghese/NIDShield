@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIDS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Adding CSS for beautification -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .btn-submit {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+        }
+        #error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        #footer {
+            margin-top: 50px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Network Intrusion Detection System</h1>
+        
+        <!-- Form for uploading the file -->
+        <form action='/' method="post" enctype="multipart/form-data">
+            <input type="file" name="DFfile" accept=".json, .df">
+            <br>
+            <input class="btn-submit" type="submit" value="Predict">
+            <div id="loading">Loading...</div>
+            <div id="error"></div>
+        </form>
+
+        <!-- Display attack predictions -->
+        {% if prediction %}
+            <p>Attack Predictions: {{ prediction }}</p>
+            <!-- Display Plotly bar chart -->
+            <div>{{ plot | safe }}</div>
+        {% endif %}
+    </div>
+
+    <div id="footer">
+        <p>© 2024, NIDSHIELD</p>
+    </div>
+
+    <script>
+        // Show loading state while file is being uploaded and model is making predictions
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+        });
+
+        // Show error message if file upload fails
+        document.querySelector('form').addEventListener('reset', function() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

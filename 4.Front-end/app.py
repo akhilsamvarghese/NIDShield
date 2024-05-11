@@ -10,7 +10,7 @@ from plotly.subplots import make_subplots
 app = Flask(__name__)
 
 # Load the trained model
-GB_exported = pickle.load(open('/Users/akhilsamvarghese/Desktop/Projects/ai-tutorial/nids/2.saved-models/GB', 'rb'))
+GB_exported = pickle.load(open('/Users/akhilsamvarghese/Desktop/Projects/NIDShield/nids/2.saved-models/GB', 'rb'))
 
 # Create directory if it doesn't exist
 DF_directory = "./DF/"

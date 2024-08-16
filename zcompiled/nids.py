@@ -99,7 +99,7 @@ attacks_types = {
 
 # %% [markdown]
 # READING DATASET
-
+# KDDCUP1999
 # %%
 path = "/Users/akhilsamvarghese/Desktop/Projects/ai-tutorial/nids/archive-2/kddcup.data_10_percent.gz"
 df = pd.read_csv(path,names=columns)
